@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" name="inputfile"
+            id="inputfile">
+    <br>
+   
+    <pre id="output"></pre>
+      
+    <script type="text/javascript">
+        function FileHelper()
+
+        {
+            FileHelper.readStringFromFileAtPath = function(pathOfFileToReadFrom)
+            {
+                var request = new XMLHttpRequest();
+                request.open("GET", pathOfFileToReadFrom, false);
+                request.send(null);
+                var returnValue = request.responseText;
+        
+                return returnValue;
+            }
+        }
+        
+        var text = FileHelper.readStringFromFileAtPath ( "sample.txt" );
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <script>
+        const declaredArray = [5,33,53,67,154,734,2,6,17,87];
+
+        //Custom Map Prototype
+        //The Map Prototype performs an action to change every value in an array.
+        Array.prototype.myMap = function(callback){
+            var arr = [];
+            for(let i = 0; i < this.length; i++){
+                arr.push(callback(this[i]));
+            }
+            return arr;
+        };
+        //Custom Filter Prototype
+        //The Filter Prototype creates a new array with elements that meets the criteria of an entered condition
+        Array.prototype.myFilter = function(callback){
+            var arr = [];
+            for(let i = 0; i < this.length; i++){
+                if(callback(this[i]) == true){
+                    arr.push(this[i]);
+                }
+            }
+            return arr;
+        }
+        //Custom Reduce Prototype
+        //The Reduce Prototype totals the sum of all elements in an array
+        Array.prototype.myReduce = function(callback){
+            var a = 0;
+            for(let i = 0; i < this.length; i++){
+                callback(a = a + this[i])
+            } 
+            return a;
+       }
+
+        let myMapCall = declaredArray.myMap(item => item *2);
+        let myFilterCall = declaredArray.myFilter(i => i>20);
+        var myReduceCall = declaredArray.myReduce((acc, item) => acc + item);
+        document.getElementById("demo").innerHTML =
+              "Base Array: " + declaredArray
+            + "<br/> Map Array * 2 : " + myMapCall
+            + "<br/> Filter Array i > 20 : " + myFilterCall
+            + "<br/> Reduce Array acc + item : " + myReduceCall;
+    </script>
+</body>
+</html>
