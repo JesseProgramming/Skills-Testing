@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <p id="demo2"></p>
+    <script>
+        let elements = ['pizza', 'lasagna', 'spaghetti', 'burrito', 'icecream', 'sunrise land', 
+        'how about i do anyways', 'the sun is a deadly laser', "not anymore there's a blanket"];
+        document.getElementById("demo").innerHTML = elements;
+        elements.sort((a,b) => {
+            if(a < b)
+                return -1;
+            if(a > b)
+                return 1;
+            return 0;
+        });
+        document.getElementById("demo2").innerHTML = elements;
+    </script>
+</body>
+</html>

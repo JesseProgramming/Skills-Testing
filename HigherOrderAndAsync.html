@@ -8,47 +8,99 @@
 </head>
 <body>
     <p id="demo"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+    <p id="demo4"></p>
     <script>
-        const declaredArray = [5,33,53,67,154,734,2,6,17,87];
+    
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////    
 
-        //Custom Map Prototype
-        //The Map Prototype performs an action to change every value in an array.
-        Array.prototype.myMap = function(callback){
-            var arr = [];
-            for(let i = 0; i < this.length; i++){
-                arr.push(callback(this[i]));
-            }
-            return arr;
-        };
-        //Custom Filter Prototype
-        //The Filter Prototype creates a new array with elements that meets the criteria of an entered condition
-        Array.prototype.myFilter = function(callback){
-            var arr = [];
-            for(let i = 0; i < this.length; i++){
-                if(callback(this[i]) == true){
-                    arr.push(this[i]);
-                }
-            }
-            return arr;
+    const declaredArray = [5,33,53,67,154,734,2,6,17,87];
+
+    //Custom Map Prototype
+    //The Map Prototype performs an action to change every value in an array.
+    Array.prototype.myMap = function(callback){
+        var arr = [];
+        for(let i = 0; i < this.length; i++){
+            arr.push(callback(this[i]));
         }
-        //Custom Reduce Prototype
-        //The Reduce Prototype totals the sum of all elements in an array
-        Array.prototype.myReduce = function(callback){
-            var a = 0;
-            for(let i = 0; i < this.length; i++){
-                callback(a = a + this[i])
-            } 
-            return a;
-       }
+        return arr;
+    };
+    //Custom Filter Prototype
+    //The Filter Prototype creates a new array with elements that meets the criteria of an entered condition
+    Array.prototype.myFilter = function(callback){
+        var arr = [];
+        for(let i = 0; i < this.length; i++){
+            if(callback(this[i]) == true){
+                arr.push(this[i]);
+            }
+        }
+        return arr;
+    }
+    //Custom Reduce Prototype
+    //The Reduce Prototype totals the sum of all elements in an array
+    Array.prototype.myReduce = function(callback){
+        var a = 0;
+        for(let i = 0; i < this.length; i++){
+            callback(a = a + this[i])
+        } 
+        return a;
+    }
 
-        let myMapCall = declaredArray.myMap(item => item *2);
-        let myFilterCall = declaredArray.myFilter(i => i>20);
-        var myReduceCall = declaredArray.myReduce((acc, item) => acc + item);
-        document.getElementById("demo").innerHTML =
-              "Base Array: " + declaredArray
-            + "<br/> Map Array * 2 : " + myMapCall
-            + "<br/> Filter Array i > 20 : " + myFilterCall
-            + "<br/> Reduce Array acc + item : " + myReduceCall;
+    //Show results
+    let myMapCall = declaredArray.myMap(item => item *2);
+    let myFilterCall = declaredArray.myFilter(i => i>20);
+    var myReduceCall = declaredArray.myReduce((acc, item) => acc + item);
+    document.getElementById("demo").innerHTML =
+          "Base Array: " + declaredArray
+        + "<br/> Map Array * 2 : " + myMapCall
+        + "<br/> Filter Array i > 20 : " + myFilterCall
+        + "<br/> Reduce Array acc + item : " + myReduceCall;
+    
+    /////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+    
+    //Promise
+    function myDisplayer(some) {
+        document.getElementById("demo2").innerHTML = some;
+    }
+    let myPromise = new Promise(function(myResolve, myReject) {
+        let x = 0;
+        // The producing code (this may take some time)
+        if (x == 0) {
+            myResolve("OK");
+        }
+        else {
+            myReject("Error");
+        }
+    });
+      
+    myPromise.then(
+        function(value) {myDisplayer(value);},
+        function(error) {myDisplayer(error);}
+    );
+    //Async and await - basic syntax
+    async function myDisplay() {
+        let myPromise = new Promise(function(resolve, reject) {
+          resolve("I love You !!");
+        });
+        document.getElementById("demo3").innerHTML = await myPromise;
+      }
+      
+      myDisplay();
+
+    //Time out example
+    async function myDisplay() {
+    let myPromise = new Promise(function(resolve) {
+        setTimeout(function() {resolve("I love You !!");}, 750);
+    });
+    document.getElementById("demo4").innerHTML = await myPromise;
+    }
+    
+    myDisplay();
+
+
     </script>
 </body>
 </html>
