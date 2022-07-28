@@ -46,3 +46,4 @@ Array.prototype.mergeSort = function(compareFn) {
             return false
     }
 }
+
